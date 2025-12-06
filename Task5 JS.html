@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 5</title>
+</head>
+<body>
+    <script>
+        function checkDivisibility(x, y, z) {
+            let divisibleByY = x % y === 0;
+            let divisibleByZ = x % z === 0;
+            
+            if (divisibleByY && divisibleByZ) {
+                document.write(x + " is divisible by both " + y + " and " + z + ".");
+            } else if (divisibleByY) {
+                document.write(x + " is divisible by " + y + " only.");
+            } else if (divisibleByZ) {
+                document.write(x + " is divisible by " + z + " only.");
+            } else {
+                document.write(x + " is not divisible by " + y + " or " + z + ".");
+            }
+        }
+        
+        let x = Number(prompt("Enter x:"));
+        let y = Number(prompt("Enter y:"));
+        let z = Number(prompt("Enter z:"));
+        
+        checkDivisibility(x, y, z);
+    </script>
+</body>
+</html>

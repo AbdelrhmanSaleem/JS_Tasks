@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 3</title>
+</head>
+<body>
+    <script>
+        let sum = 0;
+        let value;
+        
+        while (true) {
+            value = prompt("Enter a number (0 to stop):");
+            
+            if (isNaN(value) || value === null || value === "") {
+                alert("Please enter a numeric value");
+                continue;
+            }
+            
+            value = Number(value);
+            
+            if (value === 0) {
+                break;
+            }
+            
+            sum += value;
+            
+            if (sum > 100) {
+                break;
+            }
+        }
+        
+        console.log("Total sum: " + sum);
+    </script>
+</body>
+</html>
