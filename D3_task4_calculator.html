@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 4 - Math Expression Calculator</title>
+</head>
+<body>
+    <h1>Math Expression Calculator</h1>
+    <button onclick="calculateExpression()">Enter Expression</button>
+
+    <script>
+        // Function that evaluates math expression without eval()
+        function evaluateExpression(expression) {
+            // Remove all spaces
+            expression = expression.replace(/\s+/g, '');
+            
+            // Split expression into numbers and operators
+            var numbers = [];
+            var operators = [];
+            var currentNumber = '';
+            
+            for (var i = 0; i < expression.length; i++) {
+                var char = expression[i];
+                
+                // Check if character is a digit or decimal point
+                if (char >= '0' && char <= '9' || char === '.') {
+                    currentNumber += char;
+                } else if (char === '+' || char === '-' || char === '*' || char === '/') {
+                    // Save the number we've built
+                    if (currentNumber !== '') {
+                        numbers.push(parseFloat(currentNumber));
+                        currentNumber = '';
+                    }
+                    // Save the operator
+                    operators.push(char);
+                }
+            }
+            
+            // Don't forget the last number
+            if (currentNumber !== '') {
+                numbers.push(parseFloat(currentNumber));
+            }
+            
+            // First, handle multiplication and division (higher priority)
+            var i = 0;
+            while (i < operators.length) {
+                if (operators[i] === '*' || operators[i] === '/') {
+                    var result;
+                    if (operators[i] === '*') {
+                        result = numbers[i] * numbers[i + 1];
+                    } else {
+                        result = numbers[i] / numbers[i + 1];
+                    }
+                    
+                    // Replace the two numbers with result
+                    numbers.splice(i, 2, result);
+                    // Remove the operator we just used
+                    operators.splice(i, 1);
+                } else {
+                    i++;
+                }
+            }
+            
+            // Then handle addition and subtraction
+            i = 0;
+            while (i < operators.length) {
+                var result;
+                if (operators[i] === '+') {
+                    result = numbers[i] + numbers[i + 1];
+                } else {
+                    result = numbers[i] - numbers[i + 1];
+                }
+                
+                // Replace the two numbers with result
+                numbers.splice(i, 2, result);
+                // Remove the operator we just used
+                operators.splice(i, 1);
+            }
+            
+            // Return the final result
+            return numbers[0];
+        }
+        
+        function calculateExpression() {
+            var expression = prompt("Enter a math expression (e.g., 3+4*5/10*8):");
+            
+            if (!expression) {
+                alert("No expression entered!");
+                return;
+            }
+            
+            try {
+                // Calculate the result
+                var result = evaluateExpression(expression);
+                
+                // Display result in required format
+                alert("You entered: " + expression + ", and the result is: " + result);
+            } catch (error) {
+                // If expression is invalid, show error
+                alert("Invalid expression! Please enter a valid math expression.");
+            }
+        }
+    </script>
+</body>
+</html>

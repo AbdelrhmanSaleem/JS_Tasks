@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 5 - Student Management</title>
+</head>
+<body>
+    <h1>Student Management System</h1>
+    <button onclick="findTopStudent()">a. Find Top Student (90-100)</button><br><br>
+    <button onclick="findFailingStudents()">b. Find Failing Students (<60)</button><br><br>
+    <button onclick="addStudent()">c. Add Student & Print (for...in)</button><br><br>
+    <button onclick="removeStudent()">d. Remove Last & Print (for...of)</button><br><br>
+    <button onclick="sortStudents()">e. Sort Alphabetically</button><br><br>
+    <button onclick="addAfterSecond()">f. Add 2 After Second (splice)</button><br><br>
+    <button onclick="removeAfterThird()">g. Remove 1 After Third (splice)</button><br><br>
+    <div id="result"></div>
+
+    <script>
+        // Array of student objects
+        var students = [
+            {name: "Ahmed", degree: 85},
+            {name: "Sara", degree: 95},
+            {name: "Mohamed", degree: 55},
+            {name: "Fatma", degree: 78},
+            {name: "Ali", degree: 92},
+            {name: "Nour", degree: 45}
+        ];
+        
+        // a. Find student with degree between 90 and 100
+        function findTopStudent() {
+            var topStudent = students.find(function(student) {
+                return student.degree >= 90 && student.degree <= 100;
+            });
+            
+            if (topStudent) {
+                alert("Top student: " + topStudent.name + " with degree: " + topStudent.degree);
+            } else {
+                alert("No student found with degree 90-100");
+            }
+        }
+        
+        // b. Print students with degree less than 60
+        function findFailingStudents() {
+            var failingStudents = students.filter(function(student) {
+                return student.degree < 60;
+            });
+            
+            var names = [];
+            for (var i = 0; i < failingStudents.length; i++) {
+                names.push(failingStudents[i].name);
+            }
+            
+            if (names.length > 0) {
+                alert("Students with degree < 60:\n" + names.join(", "));
+            } else {
+                alert("No failing students");
+            }
+        }
+        
+        // c. Add new student and print using for...in
+        function addStudent() {
+            var name = prompt("Enter student name:");
+            var degree = prompt("Enter student degree:");
+            
+            if (!name || !degree) return;
+            
+            degree = parseInt(degree);
+            if (isNaN(degree)) {
+                alert("Invalid degree!");
+                return;
+            }
+            
+            // Add to array
+            students.push({name: name, degree: degree});
+            
+            // Print using for...in (iterates over indices)
+            var output = "All students after adding (for...in):\n";
+            for (var index in students) {
+                output += (parseInt(index) + 1) + ". " + students[index].name + 
+                          " - Degree: " + students[index].degree + "\n";
+            }
+            
+            document.getElementById("result").innerHTML = "<pre>" + output + "</pre>";
+        }
+        
+        // d. Remove last student and print using for...of
+        function removeStudent() {
+            var removed = students.pop();
+            
+            if (removed) {
+                // Print using for...of (iterates over values directly)
+                var output = "All students after removing last (for...of):\n";
+                var count = 1;
+                for (var student of students) {
+                    output += count + ". " + student.name + " - Degree: " + 
+                              student.degree + "\n";
+                    count++;
+                }
+                
+                document.getElementById("result").innerHTML = 
+                    "<p>Removed: " + removed.name + "</p>" +
+                    "<pre>" + output + "</pre>";
+            } else {
+                alert("No students to remove!");
+            }
+        }
+        
+        // e. Sort alphabetically by name
+        function sortStudents() {
+            students.sort(function(a, b) {
+                // Compare names alphabetically
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                return 0;
+            });
+            
+            var output = "Students sorted alphabetically:\n";
+            for (var i = 0; i < students.length; i++) {
+                output += (i + 1) + ". " + students[i].name + 
+                          " - Degree: " + students[i].degree + "\n";
+            }
+            
+            document.getElementById("result").innerHTML = "<pre>" + output + "</pre>";
+        }
+        
+        // f. Add 2 students after second element
+        function addAfterSecond() {
+            // splice(position, deleteCount, items...)
+            // position 2 means after 2nd element (0-indexed)
+            students.splice(2, 0, 
+                {name: "Mona", degree: 88},
+                {name: "Omar", degree: 72}
+            );
+            
+            var output = "After adding 2 students after 2nd position:\n";
+            for (var i = 0; i < students.length; i++) {
+                output += (i + 1) + ". " + students[i].name + 
+                          " - Degree: " + students[i].degree + "\n";
+            }
+            
+            document.getElementById("result").innerHTML = "<pre>" + output + "</pre>";
+        }
+        
+        // g. Remove 1 student after third element
+        function removeAfterThird() {
+            // Remove 1 element at position 3 (after 3rd element, which is 4th element)
+            var removed = students.splice(3, 1);
+            
+            var output = "After removing 1 student after 3rd position:\n";
+            output += "Removed: " + removed[0].name + "\n\n";
+            
+            for (var i = 0; i < students.length; i++) {
+                output += (i + 1) + ". " + students[i].name + 
+                          " - Degree: " + students[i].degree + "\n";
+            }
+            
+            document.getElementById("result").innerHTML = "<pre>" + output + "</pre>";
+        }
+    </script>
+</body>
+</html>

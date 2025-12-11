@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 3 - Tip of the Day</title>
+</head>
+<body>
+    <h1>JavaScript Tip of the Day</h1>
+    <div id="tip"></div>
+    <button onclick="showRandomTip()">Show Another Tip</button>
+
+    <script>
+        // Array of 10 JavaScript tips
+        var jsTips = [
+            "Use 'let' and 'const' instead of 'var' for better scope management.",
+            "Always use === instead of == for comparison to avoid type coercion.",
+            "Use array methods like map(), filter(), and reduce() for cleaner code.",
+            "Remember that JavaScript is case-sensitive: myVar and myvar are different.",
+            "Use template literals with backticks for easier string concatenation: `Hello ${name}`",
+            "Arrays in JavaScript are zero-indexed, meaning the first element is at index 0.",
+            "Use console.log() for debugging instead of alert() during development.",
+            "Functions in JavaScript are first-class objects and can be passed as arguments.",
+            "The 'this' keyword refers to the object that is executing the current function.",
+            "Use semicolons at the end of statements to avoid automatic semicolon insertion issues."
+        ];
+        
+        // Function to show random tip
+        function showRandomTip() {
+            // Generate random index between 0 and array length - 1
+            var randomIndex = Math.floor(Math.random() * jsTips.length);
+            
+            // Get the tip at random index
+            var randomTip = jsTips[randomIndex];
+            
+            // Display the tip
+            document.getElementById("tip").innerHTML = 
+                "<h2>💡 Today's Tip:</h2>" +
+                "<p>" + randomTip + "</p>";
+        }
+        
+        // Show a tip automatically when page loads
+        showRandomTip();
+    </script>
+</body>
+</html>

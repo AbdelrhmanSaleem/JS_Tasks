@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 2 - Print Odd Numbers</title>
+</head>
+<body>
+    <h1>Print Odd Numbers</h1>
+    <button onclick="getOddNumbers()">Find Odd Numbers</button>
+    <div id="result"></div>
+
+    <script>
+        // Function that prints odd numbers between start and end
+        function printOddNumbers(start, end) {
+            var oddNumbers = [];
+            
+            // Loop from start to end
+            for (var i = start; i <= end; i++) {
+                // Check if number is odd
+                // A number is odd if remainder when divided by 2 is 1
+                if (i % 2 !== 0) {
+                    oddNumbers.push(i);
+                }
+            }
+            
+            return oddNumbers;
+        }
+        
+        function getOddNumbers() {
+            var start = prompt("Enter start number:");
+            var end = prompt("Enter end number:");
+            
+            // Convert to numbers
+            start = parseInt(start);
+            end = parseInt(end);
+            
+            // Validate input
+            if (isNaN(start) || isNaN(end)) {
+                alert("Please enter valid numbers!");
+                return;
+            }
+            
+            // Get odd numbers
+            var result = printOddNumbers(start, end);
+            
+            // Display result
+            document.getElementById("result").innerHTML = 
+                "<p>Odd numbers between " + start + " and " + end + ":</p>" +
+                "<p>" + result.join(", ") + "</p>";
+        }
+    </script>
+</body>
+</html>

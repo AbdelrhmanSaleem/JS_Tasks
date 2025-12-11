@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 1 - Math Calculations</title>
+</head>
+<body>
+    <h1>Math Calculations</h1>
+    <button onclick="calculateCircleArea()">Calculate Circle Area</button>
+    <button onclick="calculateSquareRoot()">Calculate Square Root</button>
+    <button onclick="calculateCosine()">Calculate Cosine</button>
+
+    <script>
+        // Function 1: Calculate circle area
+        function calculateCircleArea() {
+            var radius = prompt("Enter the radius of the circle:");
+            
+            // Convert string to number
+            radius = parseFloat(radius);
+            
+            // Check if valid number
+            if (isNaN(radius)) {
+                alert("Please enter a valid number!");
+                return;
+            }
+            
+            // Calculate area: Area = π * r²
+            var area = Math.PI * Math.pow(radius, 2);
+            
+            // Display result rounded to 2 decimal places
+            alert("Area of circle with radius " + radius + " is: " + area.toFixed(2));
+        }
+        
+        // Function 2: Calculate square root
+        function calculateSquareRoot() {
+            var number = prompt("Enter a number to calculate its square root:");
+            
+            number = parseFloat(number);
+            
+            if (isNaN(number)) {
+                alert("Please enter a valid number!");
+                return;
+            }
+            
+            if (number < 0) {
+                alert("Cannot calculate square root of negative number!");
+                return;
+            }
+            
+            // Calculate square root
+            var result = Math.sqrt(number);
+            
+            alert("Square root of " + number + " is: " + result.toFixed(2));
+        }
+        
+        // Function 3: Calculate cosine
+        function calculateCosine() {
+            var angle = prompt("Enter an angle in degrees:");
+            
+            angle = parseFloat(angle);
+            
+            if (isNaN(angle)) {
+                alert("Please enter a valid number!");
+                return;
+            }
+            
+            // Convert degrees to radians: radians = degrees * (π / 180)
+            var radians = angle * (Math.PI / 180);
+            
+            // Calculate cosine
+            var cosValue = Math.cos(radians);
+            
+            alert("Cosine of " + angle + "° is: " + cosValue.toFixed(4));
+        }
+    </script>
+</body>
+</html>
