@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1.4 User Info Form</title>
+</head>
+<body>
+    <h1>User Information Form</h1>
+    <button onclick="getUserInfo()">Enter Your Info</button>
+    <div id="result"></div>
+
+    <script>
+        function getUserInfo() {
+            // Get user name
+            var name = prompt("Enter your name:");
+            if (!name) return;
+            
+            // Get user email
+            var email = prompt("Enter your email:");
+            if (!email) return;
+            
+            // Validate email
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Invalid email format!");
+                return;
+            }
+            
+            // Get user age
+            var age = prompt("Enter your age:");
+            if (!age || isNaN(age)) {
+                alert("Invalid age!");
+                return;
+            }
+            
+            // Get color choice
+            var color = prompt("Choose a color (red, green, or blue):").toLowerCase();
+            if (color !== "red" && color !== "green" && color !== "blue") {
+                alert("Invalid color! Please choose red, green, or blue.");
+                return;
+            }
+            
+            // Get today's date
+            var today = new Date();
+            var dateString = today.toDateString();
+            
+            // Display result
+            var resultDiv = document.getElementById("result");
+            resultDiv.style.color = color;
+            resultDiv.innerHTML = "<h2>Welcome " + name + "!</h2>" +
+                                  "<p>Email: " + email + "</p>" +
+                                  "<p>Age: " + age + "</p>" +
+                                  "<p>Today's Date: " + dateString + "</p>";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1.1 Character Counter</title>
+</head>
+<body>
+    <h1>Character Counter</h1>
+    <button onclick="countCharacter()">Start</button>
+
+    <script>
+        function countCharacter() {
+            // Get string from user
+            var userString = prompt("Enter a string:");
+            if (!userString) return;
+            
+            // Get character to count
+            var charToCount = prompt("Enter the character you want to count:");
+            if (!charToCount) return;
+            
+            // Ask about case sensitivity
+            var caseSensitive = confirm("Consider case sensitivity? OK = Yes, Cancel = No");
+            
+            // Prepare strings for comparison
+            var searchString = caseSensitive ? userString : userString.toLowerCase();
+            var searchChar = caseSensitive ? charToCount[0] : charToCount[0].toLowerCase();
+            
+            // Count the character
+            var count = 0;
+            for (var i = 0; i < searchString.length; i++) {
+                if (searchString[i] === searchChar) {
+                    count++;
+                }
+            }
+            
+            // Display result
+            alert("The character '" + charToCount + "' appears " + count + " times");
+        }
+    </script>
+</body>
+</html>

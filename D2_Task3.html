@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1.3 Largest Word Finder</title>
+</head>
+<body>
+    <h1>Largest Word Finder</h1>
+    <button onclick="findLargest()">Find Largest Word</button>
+
+    <script>
+        function getLargestWord(str) {
+            // Split string into words
+            var words = str.split(" ");
+            
+            // Find the largest word
+            var largestWord = "";
+            for (var i = 0; i < words.length; i++) {
+                if (words[i].length > largestWord.length) {
+                    largestWord = words[i];
+                }
+            }
+            
+            return largestWord;
+        }
+        
+        function findLargest() {
+            // Get string from user
+            var userString = prompt("Enter a string:");
+            if (!userString) return;
+            
+            // Get largest word
+            var largest = getLargestWord(userString);
+            
+            // Display result
+            alert("The largest word is: " + largest);
+        }
+    </script>
+</body>
+</html>
