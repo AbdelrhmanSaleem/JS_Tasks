@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 1</title>
+</head>
+<body>
+    <script>
+        let studenGrades = [60, 100,10,15,85];
+        studenGrades.sort(function(a,b){
+            return b - a;
+        });
+        console.log("The sorted array -->" + studenGrades);
+        const max = studenGrades.find(element => element >= 100);
+        console.log("The highest grade is  " + max);
+        const Below60 = studenGrades.filter(number => number <= 60);
+        console.log("The grades below 60 are -->  " + Below60);
+    </script>
+</body>
+</html>
