@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2.1.1 Flying Child Window</title>
+</head>
+<body>
+    <h1>Flying Child Window</h1>
+    <button onclick="openFlyingWindow()">Open Flying Window</button>
+
+    <script>
+        var childWindow = null;
+        var intervalId = null;
+        var positionY = 0;
+        var direction = 1; // 1 = down, -1 = up
+
+        function openFlyingWindow() {
+            // Open a new child window
+            childWindow = window.open(
+                "",                    // URL (empty = blank page)
+                "flyingWindow",        // Window name
+                "width=300,height=200,left=100,top=100"  // Window features
+            );
+            
+            // Check if window opened successfully
+            if (!childWindow) {
+                alert("Please allow popups for this site!");
+                return;
+            }
+            
+            // Write content to child window
+            childWindow.document.write("<h2>I'm Flying!</h2>");
+            childWindow.document.write("<p>Watch me move up and down!</p>");
+            
+            // Get screen height
+            var screenHeight = window.screen.availHeight;
+            var windowHeight = 200;
+            
+            // Start moving the window
+            intervalId = setInterval(function() {
+                // Calculate new position
+                positionY += direction * 5;
+                
+                // Check boundaries and reverse direction
+                if (positionY >= screenHeight - windowHeight) {
+                    direction = -1; // Move up
+                    positionY = screenHeight - windowHeight;
+                } else if (positionY <= 0) {
+                    direction = 1; // Move down
+                    positionY = 0;
+                }
+                
+                // Move the window
+                childWindow.moveTo(100, positionY);
+                
+            }, 50); // Update every 50 milliseconds
+        }
+        
+        function stopFlyingWindow() {
+            // Stop the movement
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+                alert("Child window movement stopped!");
+            }
+        }
+    </script>
+    
+    <br><br>
+    <button onclick="stopFlyingWindow()">Stop Child Window</button>
+</body>
+</html>
